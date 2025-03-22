@@ -4,6 +4,45 @@ import numpy as np
 from deepface import DeepFace
 import matplotlib.pyplot as plt
 
+# Custom CSS for styling
+st.markdown("""
+    <style>
+    .title {
+        font-size: 3rem !important;
+        font-weight: bold !important;
+        color: #ffffff !important;
+        background: linear-gradient(90deg, #FF7E5F, #FEB47B);
+        padding: 10px;
+        border-radius: 10px;
+        text-align: center;
+    }
+    .sidebar .sidebar-content {
+        background: linear-gradient(180deg, #4b6cb7, #182848);
+        color: white !important;
+    }
+    .stButton button {
+        background: linear-gradient(90deg, #FF7E5F, #FEB47B);
+        color: white !important;
+        font-weight: bold;
+        border: none;
+        border-radius: 5px;
+        padding: 10px 20px;
+    }
+    .stButton button:hover {
+        background: linear-gradient(90deg, #FEB47B, #FF7E5F);
+    }
+    .footer {
+        position: fixed;
+        bottom: 0;
+        width: 100%;
+        text-align: center;
+        padding: 10px;
+        background: linear-gradient(90deg, #4b6cb7, #182848);
+        color: white;
+    }
+    </style>
+    """, unsafe_allow_html=True)
+
 # Function to analyze image
 def analyze_image(img_array):
     try:
@@ -13,52 +52,10 @@ def analyze_image(img_array):
         return {"error": str(e)}
 
 # Set page title and favicon
-st.set_page_config(page_title="Gender & Emotion Recognition", page_icon="😊", layout="centered")
+st.set_page_config(page_title="Gender & Emotion Recognition", page_icon="😊")
 
-# Custom styling
-st.markdown("""
-    <style>
-        .stTitle {
-            text-align: center;
-            font-size: 3rem !important;
-            color: #4A90E2;
-        }
-        .stMarkdown {
-            text-align: center;
-            font-size: 1.2rem !important;
-        }
-        .stButton button {
-            background-color: #4A90E2;
-            color: white;
-            font-weight: bold;
-            border-radius: 5px;
-            padding: 10px 20px;
-            border: none;
-        }
-        .stButton button:hover {
-            background-color: #357ABD;
-        }
-        .stSidebar {
-            background: linear-gradient(180deg, #4A90E2, #357ABD);
-            color: white;
-        }
-        .stSuccess {
-            background-color: #E6F4EA !important;
-            color: #2E8B57 !important;
-            border-radius: 5px;
-            padding: 10px;
-        }
-        .stError {
-            background-color: #FFEBEE !important;
-            color: #D32F2F !important;
-            border-radius: 5px;
-            padding: 10px;
-        }
-    </style>
-""", unsafe_allow_html=True)
-
-# Title and description
-st.title("🎭 Gender & Emotion Recognition")
+# Title with gradient background
+st.markdown('<div class="title">🎭 Gender and Emotion Recognition</div>', unsafe_allow_html=True)
 st.markdown("""
     Upload an image, and this AI-powered app will analyze the **gender** and **emotions** of the faces using **DeepFace**.
     """)
@@ -74,12 +71,6 @@ with st.sidebar:
     Built with ❤️ using **Streamlit** & **DeepFace**
     """)
     st.markdown("---")
-    st.markdown("**🔧 How it works:**")
-    st.markdown("""
-    1. Upload an image.
-    2. Click **Analyze Image**.
-    3. View the results for gender and emotion analysis.
-    """)
 
 # File uploader
 uploaded_file = st.file_uploader("📤 Upload an image...", type=["jpg", "png"])
@@ -102,8 +93,8 @@ if uploaded_file is not None:
             col1, col2 = st.columns(2)
 
             with col1:
-                st.success(f"**🧑 Gender:** {analysis_result['gender']}")
-                st.success(f"**😊 Dominant Emotion:** {analysis_result['dominant_emotion']}")
+                st.metric(label="**🧑 Gender**", value=analysis_result['gender'])
+                st.metric(label="**😊 Dominant Emotion**", value=analysis_result['dominant_emotion'])
 
             with col2:
                 # Plot emotion probabilities as a bar chart
@@ -121,3 +112,6 @@ if uploaded_file is not None:
             st.markdown("### 📝 Detailed Emotion Probabilities:")
             for emotion, probability in analysis_result["emotion"].items():
                 st.write(f"- {emotion.capitalize()}: {probability:.2f}%")
+
+# Footer
+st.markdown('<div class="footer">© 2023 Gender & Emotion Recognition App</div>', unsafe_allow_html=True)
