@@ -2,3 +2,4 @@ streamlit
 deepface
 opencv-python-headless
 numpy
+tf-keras
