@@ -20,9 +20,39 @@ st.markdown("""
     <style>
         .stTitle {
             text-align: center;
+            font-size: 3rem !important;
+            color: #4A90E2;
         }
         .stMarkdown {
             text-align: center;
+            font-size: 1.2rem !important;
+        }
+        .stButton button {
+            background-color: #4A90E2;
+            color: white;
+            font-weight: bold;
+            border-radius: 5px;
+            padding: 10px 20px;
+            border: none;
+        }
+        .stButton button:hover {
+            background-color: #357ABD;
+        }
+        .stSidebar {
+            background: linear-gradient(180deg, #4A90E2, #357ABD);
+            color: white;
+        }
+        .stSuccess {
+            background-color: #E6F4EA !important;
+            color: #2E8B57 !important;
+            border-radius: 5px;
+            padding: 10px;
+        }
+        .stError {
+            background-color: #FFEBEE !important;
+            color: #D32F2F !important;
+            border-radius: 5px;
+            padding: 10px;
         }
     </style>
 """, unsafe_allow_html=True)
@@ -44,6 +74,12 @@ with st.sidebar:
     Built with ❤️ using **Streamlit** & **DeepFace**
     """)
     st.markdown("---")
+    st.markdown("**🔧 How it works:**")
+    st.markdown("""
+    1. Upload an image.
+    2. Click **Analyze Image**.
+    3. View the results for gender and emotion analysis.
+    """)
 
 # File uploader
 uploaded_file = st.file_uploader("📤 Upload an image...", type=["jpg", "png"])
