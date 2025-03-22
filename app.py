@@ -2,7 +2,7 @@ import streamlit as st
 import cv2
 import numpy as np
 from deepface import DeepFace
-import matplotlib.pyplot as plt
+import matplotlib.pyplot as plt  # Requires matplotlib
 
 # Function to analyze image
 def analyze_image(img_array):
